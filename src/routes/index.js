@@ -1,12 +1,12 @@
-import { Router } from "express";
+const { Router } = require("express");
 
-import {
+const {
   renderAboutPage,
   renderIndexPage,
   renderNewEntryPage,
   createNewEntry,
   deleteBook,
-} from "../controllers/index.controller";
+} = require("../controllers/index.controller");
 
 const router = Router();
 
@@ -20,4 +20,4 @@ router.post("/new-entry", createNewEntry);
 
 router.get("/delete/:id", deleteBook);
 
-export default router;
+module.exports = router;

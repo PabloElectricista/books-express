@@ -1,17 +1,17 @@
-import config from "../config";
-import fs from "fs";
-import { v4 } from "uuid";
+const config = require("../config");
+const fs = require("fs");
+const { v4 } = require("uuid");
 
 const json_books = fs.readFileSync("src/books.json", "utf-8");
 let books = JSON.parse(json_books);
 
-export const renderIndexPage = (req, res) => res.render("index", { books });
+const renderIndexPage = (req, res) => res.render("index", { books });
 
-export const renderAboutPage = (req, res) => res.render("about", config);
+const renderAboutPage = (req, res) => res.render("about", config);
 
-export const renderNewEntryPage = (req, res) => res.render("new-entry");
+const renderNewEntryPage = (req, res) => res.render("new-entry");
 
-export const createNewEntry = (req, res) => {
+const createNewEntry = (req, res) => {
   const { title, author, image, description } = req.body;
 
   if (!title || !author || !image || !description) {
@@ -37,7 +37,7 @@ export const createNewEntry = (req, res) => {
   res.redirect("/");
 };
 
-export const deleteBook = (req, res) => {
+const deleteBook = (req, res) => {
   console.log({ books });
   books = books.filter((book) => book.id != req.params.id);
 
@@ -45,4 +45,12 @@ export const deleteBook = (req, res) => {
   const json_books = JSON.stringify(books);
   fs.writeFileSync("src/books.json", json_books);
   res.redirect("/");
+};
+
+module.exports = {
+  renderIndexPage,
+  renderAboutPage,
+  renderNewEntryPage,
+  createNewEntry,
+  deleteBook,
 };

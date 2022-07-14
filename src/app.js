@@ -1,9 +1,9 @@
-import express from "express";
-import path from "path";
-import morgan from "morgan";
-import routes from "./routes";
+const express = require("express");
+const path = require("path");
+const morgan = require("morgan");
+const routes = require("./routes");
 
-import config from "./config";
+const config = require("./config");
 
 const app = express();
 
@@ -33,4 +33,4 @@ app.use((req, res, next) => {
   res.status(404).render("404");
 });
 
-export default app;
+module.exports = app;
